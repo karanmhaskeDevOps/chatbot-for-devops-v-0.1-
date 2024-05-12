@@ -1,4 +1,23 @@
 # chatbot-for-devops-v-0.1-
+import openai
+import os
+#openai.api_key = ("your_api_key")                                                   # Enter your api key here
+messages = [
+    {"role": "system", "content": "You are a kind helpful DevOps assistant ."},
+]                                                                                   #system message
+while True:
+    message = input("User : ")                                                      #user input
+    if message:
+        messages.append(
+            {"role": "user", "content": message},
+        )                                                                           #user message
+        chat = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=messages
+        )
+    
+    reply = chat.choices[0].message.content                                        #chatgpt reply
+    print(f"ChatGPT: {reply}")
+    messages.append({"role": "assistant", "content": reply})
 
 
 Title: Enhanced DevOps Assistant with OpenAI API
